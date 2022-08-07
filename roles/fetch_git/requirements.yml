@@ -1,5 +1,5 @@
 ---
 roles:
-  - name: hoahovan.pull_git
+  - name: hoahovan.fetch_git
 collections:
   - name: community.general

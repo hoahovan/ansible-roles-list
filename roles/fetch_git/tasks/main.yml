@@ -1,7 +1,7 @@
 ---
 
-- name: Pull repo project
-  ansible.builtin.command: "git pull origin {{ branch }} --tags"
+- name: Fetch repo project
+  ansible.builtin.command: "git fetch origin {{ branch }} --tags"
   become: true
   become_user: "{{ app_user }}"
   args:
