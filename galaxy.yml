@@ -7,10 +7,7 @@ authors:
   - Hoa Ho Van <hoahv.vn@gmail.com>
 description: A collection of all roles listed in [robertdebock.nl](https://robertdebock.nl/).
 dependencies:
-  community.crypto: "*"
   community.general: "*"
-  community.mysql: "*"
-  community.postgresql: "*"
 repository: https://github.com/hoahovan/ansible-roles-list
 documentation: https://github.com/hoahovan/ansible-roles-list
 homepage: https://github.com/hoahovan/ansible-roles-list
