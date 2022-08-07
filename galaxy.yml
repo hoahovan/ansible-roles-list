@@ -6,10 +6,6 @@ readme: README.md
 authors:
   - Hoa Ho Van <hoahv.vn@gmail.com>
 description: A collection of all roles listed in [robertdebock.nl](https://robertdebock.nl/).
-license_file: 'LICENSE'
-tags:
-  - hoahovan
-  - roles
 dependencies:
   community.crypto: "*"
   community.general: "*"
