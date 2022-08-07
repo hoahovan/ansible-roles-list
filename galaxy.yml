@@ -1,0 +1,22 @@
+---
+namespace: hoahovan
+name: roles
+version: 0.1
+readme: README.md
+authors:
+  - Hoa Ho Van <hoahv.vn@gmail.com>
+description: A collection of all roles listed in [robertdebock.nl](https://robertdebock.nl/).
+license_file: 'LICENSE'
+tags:
+  - hoahovan
+  - roles
+dependencies:
+  community.crypto: "*"
+  community.general: "*"
+  community.mysql: "*"
+  community.postgresql: "*"
+repository: https://github.com/hoahovan/ansible-roles-list
+documentation: https://github.com/hoahovan/ansible-roles-list
+homepage: https://github.com/hoahovan/ansible-roles-list
+issues: https://github.com/hoahovan/ansible-roles-list/issues
+build_ignore: []

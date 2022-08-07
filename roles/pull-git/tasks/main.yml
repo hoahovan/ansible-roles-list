@@ -1,0 +1,16 @@
+---
+
+- name: Pull repo project
+  ansible.builtin.command: "git pull origin {{ branch }} --tags"
+  become: true
+  become_user: "{{ app_user }}"
+  args:
+    chdir: "{{ www_path }}"
+
+- name: Checkout with tag
+  when: tag is defined
+  ansible.builtin.command: "git checkout tags/{{ tag }}"
+  become: true
+  become_user: "{{ app_user }}"
+  args:
+    chdir: "{{ www_path }}"
