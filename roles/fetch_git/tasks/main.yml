@@ -1,7 +1,7 @@
 ---
 
-- name: Fetch repo project
-  ansible.builtin.command: "git fetch origin {{ branch }} --tags"
+- name: "Fetch repo project with type: {{ fetch_type }}"
+  ansible.builtin.command: "git {{ fetch_type | default('fetch') }} origin {{ branch }} --tags"
   become: true
   become_user: "{{ app_user }}"
   args:

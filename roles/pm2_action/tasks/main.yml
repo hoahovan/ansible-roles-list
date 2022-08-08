@@ -1,0 +1,6 @@
+---
+
+- name: "Reload with pm2 app: {{ pm2_app }}"
+  ansible.builtin.command: "pm2 reload {{ pm2_app }}"
+  become: true
+  become_user: "{{ app_user }}"

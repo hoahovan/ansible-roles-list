@@ -1,0 +1,5 @@
+---
+roles:
+  - name: hoahovan.pm2_action
+collections:
+  - name: community.general
