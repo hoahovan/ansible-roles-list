@@ -1,0 +1,11 @@
+---
+
+- name: "Update package in {{ www_path }}"
+  ansible.builtin.command: "yarn"
+  args:
+    chdir: "{{ www_path }}"
+
+- name: "Yarn action: {{ yarn_action }}"
+  ansible.builtin.command: "yarn {{ yarn_action }}"
+  args:
+    chdir: "{{ www_path }}"

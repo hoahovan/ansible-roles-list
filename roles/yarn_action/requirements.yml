@@ -1,0 +1,5 @@
+---
+roles:
+  - name: hoahovan.yarn_action
+collections:
+  - name: community.general
