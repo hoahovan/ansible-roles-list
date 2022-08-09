@@ -1,0 +1,4 @@
+---
+
+- name: "Ufw action: {{ action }}"
+  ansible.builtin.command: "ufw {{ action }}"

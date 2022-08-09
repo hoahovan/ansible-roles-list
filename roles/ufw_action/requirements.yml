@@ -1,0 +1,5 @@
+---
+roles:
+  - name: hoahovan.ufw_action
+collections:
+  - name: community.general

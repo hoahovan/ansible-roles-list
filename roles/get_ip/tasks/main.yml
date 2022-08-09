@@ -1,0 +1,7 @@
+---
+
+- name: "Get ip with host {{ ip_host }}"
+  ansible.builtin.command: "curl {{ ip_host }}"
+  register: get_ip_result
+  vars:
+    ip_host: icanhazip.com

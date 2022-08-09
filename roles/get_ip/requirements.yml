@@ -1,0 +1,5 @@
+---
+roles:
+  - name: hoahovan.get_ip
+collections:
+  - name: community.general

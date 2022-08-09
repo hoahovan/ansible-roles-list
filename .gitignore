@@ -1,2 +1,6 @@
+# Common
 .cache
 .DS_Store
+
+# Local test
+inventory
