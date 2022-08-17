@@ -14,3 +14,11 @@
   become_user: "{{ app_user }}"
   args:
     chdir: "{{ www_path }}"
+
+- name: Git pull if not exist tag
+  when: tag is not defined
+  ansible.builtin.command: "git pull"
+  become: true
+  become_user: "{{ app_user }}"
+  args:
+    chdir: "{{ www_path }}"
