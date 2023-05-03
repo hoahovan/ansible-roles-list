@@ -1,0 +1,24 @@
+---
+
+- name: Update and upgrade apt packages
+  become: yes
+  apt:
+    update_cache: yes
+    upgrade: yes
+
+- name: install ssh client
+  ansible.builtin.package:
+    name: openssh-client
+    state: present
+
+# - name: Create .ssh folder if not exist
+#   file:
+#     path: "~/.ssh"
+#     state: directory
+#     mode: 0700
+
+# - name: copy ssh config
+#   ansible.builtin.template:
+#     src: rsa.j2
+#     dest: "~/.ssh/id_rsa"
+#     mode: 0600

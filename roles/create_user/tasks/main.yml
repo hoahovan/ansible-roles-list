@@ -1,0 +1,8 @@
+---
+
+- name: SYSTEM - Set authorized key for app_user took from file
+  tags: system-user
+  authorized_key:
+    user: "{{ app_user }}"
+    state: present
+    key: "{{ app_user_pubkey }}"

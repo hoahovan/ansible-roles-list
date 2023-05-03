@@ -1,0 +1,5 @@
+---
+roles:
+  - name: hoahovan.create_user
+collections:
+  - name: community.general

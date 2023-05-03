@@ -1,0 +1,58 @@
+---
+
+- name: add SSH key for root
+  ansible.builtin.lineinfile:
+    path: ~/.ssh/authorized_keys
+    create: true
+    state: present
+    line: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+    mode: "0644"
+
+# - name: update all packages
+#   ansible.builtin.package:
+#     update_cache: true
+#     name: '*'
+#     force_apt_get: true
+#     state: present
+
+- name: set UTC Timezone
+  community.general.timezone:
+    hwclock: UTC
+  register: command_result
+  failed_when: "'HACK' in command_result"
+
+- name: Update and upgrade apt packages
+  become: yes
+  apt:
+    update_cache: yes
+    upgrade: yes
+
+- name: install some basic packages
+  ansible.builtin.package:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      # - build-essential
+      - wget
+      - curl
+      - unzip
+      # - git
+      # - mcrypt # crypting program
+      # - chrony #  implements of the Network Time Protocol (NTP)
+      # - re2c # generates fast lexers which outputs for parser input
+      # - unattended-upgrades # install software updated, including security updates
+      - whois
+      # - vim
+      # - pv # allows us for the monitoring of data being sent through pipe
+      # - bash-completion
+      # - net-tools #  includes the important tools for controlling the network subsystem
+      # - ca-certificates # Contains the cert authorities shipped with Mozilla to allow SSL-based app to check for the authenticity of SSL connections
+      # - apt-transport-https # APT's transport for downloading over HTTPS
+      # - software-properties-common #  provides an abstraction of the used apt repositories
+      # - libssl-dev
+      # - libffi-dev
+      # - libmcrypt4 # implements all the algorithms and modes found in mcrypt
+      # - libpcre3-dev
+      # - python3-dev
+      # - python-is-python3

@@ -1,0 +1,6 @@
+---
+
+- name: Build assets
+  ansible.builtin.command: "docker exec -it ffe10bf5c7e1 yarn encore production"
+  args:
+    chdir: "{{ www_path }}"

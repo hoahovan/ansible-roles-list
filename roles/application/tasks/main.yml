@@ -1,0 +1,81 @@
+---
+
+- name: Create .ssh folder
+  file:
+    path: "{{ path }}/.ssh"
+    state: directory
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
+    mode: 0700
+
+- name: Upload SSH key
+  template:
+    src: id_rsa.j2
+    dest: "{{ path }}/.ssh/gitlab_rsa"
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
+    mode: 0600
+
+- name: Set config key
+  template:
+    src: config.j2
+    dest: "{{ path }}/.ssh/config"
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
+    mode: 0600
+
+- name: clone repo project
+  ansible.builtin.git:
+    repo: "{{ git_url_repository }}"
+    dest: "{{ www_path }}"
+    single_branch: true
+    version: "{{ git_branch }}"
+    force: true
+    clone: yes
+    update: no
+    accept_hostkey: yes
+    key_file: "{{ path }}/.ssh/gitlab_rsa"
+  become: true
+  become_user: "{{ app_user }}"
+
+- name: install dependencies
+  community.general.composer:
+    command: install
+    working_dir: "{{ www_path }}"
+    classmap_authoritative: true
+    no_dev: false
+
+- name: remove .env from repository
+  ansible.builtin.file:
+    path: "{{ www_path }}/.env"
+    state: absent
+
+- name: change file owner and group log and cache
+  ansible.builtin.file:
+    path: "{{ www_path }}/var"
+    recurse: true
+    owner: www-data
+    group: www-data
+    mode: '0755'
+
+- name: create new .env
+  ansible.builtin.template:
+    src: templates/.env.j2
+    dest: "{{ www_path }}/.env"
+    mode: '0744'
+  notify:
+    - php-fpm restart
+    - nginx restart
+
+- name: Create DB if not exists
+  ansible.builtin.command: '{{ symfony_console_path }} doctrine:database:create --if-not-exists'
+
+- name: Generate migrations
+  ansible.builtin.command: '{{ symfony_console_path }} make:migration --no-interaction'
+
+- name: Execute migrations
+  ansible.builtin.command: '{{ symfony_console_path }} doctrine:migrations:migrate --no-interaction'
+
+- name: Load data fixtures
+  ansible.builtin.command: '{{ symfony_console_path }} doctrine:fixtures:load --no-interaction'
+
